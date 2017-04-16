@@ -14,10 +14,10 @@ auth.set_access_token(access_token,access_secret)
 api = tweepy.API(auth)
 
 def main():
-    track = ["location","Australia"]
+    #track = ["location","Australia"]
     locations=[112.5927,-44.2745,153.1982,-10.1492]
  
-    listen = SListener(api, 'myprefix')
+    listen = SListener(api, 'Australia')
     stream = tweepy.Stream(auth, listen)
 
     print("Streaming started...")
