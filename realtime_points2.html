@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoibGl1anVueXVhbiIsImEiOiJjajJlbDN5dTYwNmRoMzJvODhscTZ3bnFkIn0.Vhoj1WBop0EnuGKlTm6I2w';
+var map = new mapboxgl.Map({
+    container: 'map',
+    // style: 'mapbox://styles/mapbox/streets-v9',
+    style: 'mapbox://styles/mapbox/dark-v9',
+    center: [133.7, -24],
+    zoom: 4
+});
+
+// var url = 'https://github.com/JunyuanLiu/Buddy/blob/master/testGeoJson.geojson'
+//  var url = 'http://localhost:1337/';
+  var url = 'https://wanderdrone.appspot.com/';
+//var url = 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_ports.geojson'
+var count = 0;
+
+map.on('load', function () {
+    window.setInterval(function() {
+        count++;
+        var poinId = 'geo_points_'+count;
+        var layerId = 'point_layer_'+count;
+        map.addSource(poinId, {type: 'geojson', data: url});
+        map.addLayer({
+            "id": layerId,
+            "source": poinId,
+            "type": "circle",
+            "paint": {
+                "circle-radius": 5,
+                "circle-opacity": 0,
+                "circle-opacity-transition": {
+                    duration: 5000      //fadeIn/fadeOut time
+                },
+                "circle-color": 'red'
+            }
+        });
+        // $.getJSON(url, function(json){
+        //     if(json.type == "Feature"){
+        //         map.setPaintProperty(layerId,"circle-color","blue")
+        //     }
+        // });
+        
+        window.setTimeout(function() {
+            map.setPaintProperty(layerId, 'circle-opacity', 1);
+        },1);
+        window.setTimeout(function() {
+            map.setPaintProperty(layerId, 'circle-opacity', 0);
+        },500);    //wait time begore fadeOut, that is, display time
+    }, 1500);   //interval of add new points
+});
+</script>
+
+</body>
+</html>

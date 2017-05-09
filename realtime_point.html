@@ -25,30 +25,19 @@ var map = new mapboxgl.Map({
     zoom: 4
 });
 
+
 // var url = 'https://github.com/JunyuanLiu/Buddy/blob/master/testGeoJson.geojson'
 //  var url = 'http://localhost:1337/';
-var url = 'https://wanderdrone.appspot.com/';
+  var url = 'https://wanderdrone.appspot.com/';
 //var url = 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_ports.geojson'
-
+var count = 0;
 
 map.on('load', function () {
-    window.setInterval(function() {
-        map.getSource('geo_points_1').setData(url);
-        map.getLayer('point_layer_1').setPaintProperty("circle-opacity", 1);
-        // map.getLayer('point_layer_1').setPaintProperty("circle-opacity-transition", {
-        //     duration: 5000
-        // });
-        setTimeout(function() {
-        map.setPaintProperty('point_layer_1', 'circle-opacity', 0.2);
-    },0);
-    }, 2000);
     
-
+    
     map.addSource('geo_points_1', {type: 'geojson', data: url});
     map.addSource('geo_points_2', {type: 'geojson', data: url});
     map.addSource('geo_points_3', {type: 'geojson', data: url});
-
-
     // map.addLayer({
     //     "id": "drone",
     //     "type": "symbol",
@@ -62,24 +51,77 @@ map.on('load', function () {
     "source": "geo_points_1",
     "type": "circle",
     "paint": {
-      "circle-radius": 20,
-
+      "circle-radius": 5,
       "circle-opacity": 1,
       "circle-opacity-transition": {
-        duration: 5000
+        duration: 2000
       },
       "circle-color": 'red'
     }
     });
-    // setTimeout(function() {
-    //     map.setPaintProperty('point_layer_1', 'circle-opacity', 0);
-    // },1);
+    map.addLayer({
+    "id": "point_layer_2",
+    "source": "geo_points_2",
+    "type": "circle",
+    "paint": {
+      "circle-radius": 5,
+      "circle-opacity": 1,
+      "circle-opacity-transition": {
+        duration: 2000
+      },
+      "circle-color": 'red'
+    }
+    });
+    map.addLayer({
+    "id": "point_layer_3",
+    "source": "geo_points_3",
+    "type": "circle",
+    "paint": {
+      "circle-radius": 5,
+      "circle-opacity": 1,
+      "circle-opacity-transition": {
+        duration: 2000
+      },
+      "circle-color": 'red'
+    }
+    });
+    // window.setTimeout(function() {
+    //     map.setPaintProperty('point_layer_1', 'circle-opacity', 0.2);
+    // },1000);
+    // window.setTimeout(function() {
+    //     map.setPaintProperty('point_layer_2', 'circle-opacity', 0.2);
+    // },1000);
+    // window.setTimeout(function() {
+    //     map.setPaintProperty('point_layer_3', 'circle-opacity', 0.2);
+    // },1000);
+
+    window.setInterval(function() {
+        count ++;
+        if(count%3 == 0){
+            map.getSource('geo_points_1').setData(url);
+            map.setPaintProperty('point_layer_1', 'circle-opacity', 1);
+            window.setTimeout(function() {
+                map.setPaintProperty('point_layer_1', 'circle-opacity', 0.2);
+            },3000);     
+        }
+        else if(count%3 == 1){
+            map.getSource('geo_points_2').setData(url);
+            map.setPaintProperty('point_layer_2', 'circle-opacity', 1);
+            window.setTimeout(function() {
+                map.setPaintProperty('point_layer_2', 'circle-opacity', 0.2);
+            },3000);  
+        }
+        else{
+            map.getSource('geo_points_3').setData(url);
+            map.setPaintProperty('point_layer_3','circle-opacity', 1);
+            window.setTimeout(function() {
+                map.setPaintProperty('point_layer_3', 'circle-opacity', 0.2);
+            },3000);  
+        }
+        
+    }, 2000);
     
-
 });
-
-
-
 </script>
 
 </body>
