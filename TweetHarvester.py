@@ -7,11 +7,12 @@ import tweepy
 
 class SListener(StreamListener):
 
-    def __init__(self, api = None, fprefix = 'streamer',db_address = 'http://115.146.95.85:5984/'):
+    def __init__(self, api = None, fprefix = 'streamer',db_address_1 = 'http://115.146.95.85:5984/',db_address_2 = 'http://115.146.92.189:5984/'):
         self.api = api
         self.counter = 0
         self.fprefix = fprefix
-        self.server = couchdb.Server(db_address)
+        self.server_1 = couchdb.Server(db_address_1)
+        self.server_2 = couchdb.Server(db_address_2)
 
 
     def on_data(self, data):
@@ -26,8 +27,10 @@ class SListener(StreamListener):
                 dict["location"] = var["coordinates"]["coordinates"]
                 dict["score"] = TextBlob(var["text"]).sentiment.polarity
                 print ("One tweet -> " + str(dict))
-                db = self.server['python-tests']
-                db.save(dict)
+                db_1 = self.server_1['python-tests']
+                db_2 = self.server_2['testing']
+                db_1.save(dict)
+                db_2.save(dict)
                 print("success saving! " + str(dict["id"]))
                 return dict
             except Exception as ex:

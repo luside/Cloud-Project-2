@@ -20,33 +20,62 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibGl1anVueXVhbiIsImEiOiJjajJlbDN5dTYwNmRoMzJvO
 var map = new mapboxgl.Map({
     container: 'map',
     // style: 'mapbox://styles/mapbox/streets-v9',
-    style: 'mapbox://styles/mapbox/light-v9',
+    style: 'mapbox://styles/mapbox/dark-v9',
     center: [133.7, -24],
     zoom: 4
 });
 
 // var url = 'https://github.com/JunyuanLiu/Buddy/blob/master/testGeoJson.geojson'
- var url = 'http://localhost:1337/';
-// var url = 'https://wanderdrone.appspot.com/';
+//  var url = 'http://localhost:1337/';
+var url = 'https://wanderdrone.appspot.com/';
 //var url = 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_ports.geojson'
 
 
 map.on('load', function () {
     window.setInterval(function() {
-        map.getSource('drone').setData(url);
-    }, 200);
+        map.getSource('geo_points_1').setData(url);
+        map.getLayer('point_layer_1').setPaintProperty("circle-opacity", 1);
+        // map.getLayer('point_layer_1').setPaintProperty("circle-opacity-transition", {
+        //     duration: 5000
+        // });
+        setTimeout(function() {
+        map.setPaintProperty('point_layer_1', 'circle-opacity', 0.2);
+    },0);
+    }, 2000);
     
 
-    map.addSource('drone', {type: 'geojson', data: url});
+    map.addSource('geo_points_1', {type: 'geojson', data: url});
+    map.addSource('geo_points_2', {type: 'geojson', data: url});
+    map.addSource('geo_points_3', {type: 'geojson', data: url});
 
+
+    // map.addLayer({
+    //     "id": "drone",
+    //     "type": "symbol",
+    //     "source": "drone",
+    //     "layout": {
+    //         "icon-image": "circle-15"
+    //     }
+    // });
     map.addLayer({
-        "id": "drone",
-        "type": "symbol",
-        "source": "drone",
-        "layout": {
-            "icon-image": "rocket-15"
-        }
+    "id": "point_layer_1",
+    "source": "geo_points_1",
+    "type": "circle",
+    "paint": {
+      "circle-radius": 20,
+
+      "circle-opacity": 1,
+      "circle-opacity-transition": {
+        duration: 5000
+      },
+      "circle-color": 'red'
+    }
     });
+    // setTimeout(function() {
+    //     map.setPaintProperty('point_layer_1', 'circle-opacity', 0);
+    // },1);
+    
+
 });
 
 

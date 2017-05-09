@@ -27,13 +27,6 @@ def form():
     return rst
 
 
-
-@app.route('/hello', methods=['POST'])
-def hello():
-    name=request.form['yourname']
-    return "Welcome, " + name +'\n'
-
-
 if __name__ == '__main__':
   app.run(
         host="",
