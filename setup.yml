@@ -3,6 +3,9 @@
 # Time: 10/May/2017
 # Project: Clustering and Cloud Computing - Assignment 2
 
+# In real life, ansible can take control of many virtual machines, in the first time accessing them,
+# you can use following command to ignore some checking prompts:
+ # ansible-playbook setup.yml --ask-sudo-pass --ask-become-pass
 # This playbook is used for setup all the environment for crawling tweets, filtering,
 # and storing data in couchDB
 - name: set up instances
