@@ -25,7 +25,7 @@ for img in images:
 # For assignment, we chose id ami-c163b887 name NeCTAR Ubuntu 16.04 LTS (Xenial) amd64 (pre-installed murano-agent)
 #############################################
 # create instance, the security group can be modified according to needs
-ec2_conn.run_instances('ami-c163b887', min_count=1, max_count=<up to you to decide>, key_name='CCC_liam', instance_type='m1.small',
+ec2_conn.run_instances('ami-c163b887', min_count=1, max_count=<up to you to decide>, key_name=<your key>, instance_type='m1.small',
                        security_groups=['ssh', 'default', 'icmp', 'http'], placement='melbourne-np')
 # terminate instance
 '''ec2_conn.terminate_instances(instance_ids=['instance ID, like 'i-xxxxxxxx'])'''
