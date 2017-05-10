@@ -63,7 +63,7 @@
         dest: where you store them in vm, like /home/ubuntu
     # configure couchDb on function node
     - name: configure couchDB
-      include: config.ymlCCC
+      include: config.yml
       when: inventory_hostname in groups['function']
     # start to run crawling file TweetHarvester.py
     - name: run harverster
