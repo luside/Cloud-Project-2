@@ -1,0 +1,38 @@
+---
+# Author: liyu zhang liyuz@student.unimelb.edu.au
+# Time: 10/May/2017
+# Project: Clustering and Cloud Computing - Assignment 2
+
+# This playbook is used for monitoring current python processes in screen,
+
+# To achieve auto monitoring - run this piece of code every x interval,
+# you can type these in your command line:
+  # while true; do ansible-playbook monitor.yml; sleep x; done
+  # in sleep x, variable x is the interval (second) 
+
+# if process failed, it can restart the process.
+- name: monitoring processes
+  hosts: vm
+  remote_user: root
+  become: true
+  tasks:
+    # use screen -ls to show all the processes running in screen
+    - name: monitor current processes
+      command: screen -ls
+      ignore_errors: yes
+      register: outm1
+      # show result of current processes
+    - name: show process
+      debug: var=outm1.stdout_lines
+      # relaunch failed processes, if all programs work well,
+      # this block will be skipped
+    - name: lauch harvester again
+      command: screen -dm python3 TweetHarvester.py
+      register: outm2
+      when: outm1|failed
+      # show result after relaunch failed programs, if all programs work well,
+      # this block will be skipped
+    - name: show process after relaunch
+      debug: var=outm2.stdout_lines
+      when: outm1|failed
+
