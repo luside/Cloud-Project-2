@@ -1,4 +1,4 @@
-# Author: liyu zhang
+# Author: liyu zhang liyuz@student.unimelb.edu.au
 # Time: 10/May/2017
 # Project: Clustering and Cloud Computing - Assignment 2
 from boto.ec2.regioninfo import RegionInfo
