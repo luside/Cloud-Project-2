@@ -1,3 +1,7 @@
+#Author:Side Lu<sidel@student.unimelb.edu.au>
+#Date: 10/5/2017
+#Project:COMP90024 Cluster and Cloud Computing Assignment2
+#We use REST API provided by Twitter to access data
 from tweepy import StreamListener
 import json, time, sys
 from textblob import TextBlob
@@ -7,6 +11,8 @@ import tweepy
 
 class SListener(StreamListener):
 
+    #initialize the listener
+    #we initialize with two database address.One for storage, the other for presentation
     def __init__(self, api = None, fprefix = 'streamer',db_address_1 = 'http://115.146.95.85:5984/',db_address_2 = 'http://115.146.92.189:5984/'):
         self.api = api
         self.counter = 0
@@ -16,7 +22,9 @@ class SListener(StreamListener):
 
 
     def on_data(self, data):
-
+        
+        #after getting the twitter data, we store attributes that we want into databases
+        #and ignore data without coordinates information
         if 'in_reply_to_status' in data:
             try:
                 var = json.loads(data)
@@ -52,23 +60,12 @@ class SListener(StreamListener):
             return False
 
     def on_status(self, status):
-        # self.output.write(status + "\n")
-        #
-        # self.counter += 1
-        #
-        # if self.counter >= 20000:
-        #     self.output.close()
-        #     self.output = open(self.fprefix + '.'
-        #                        + time.strftime('%Y%m%d-%H%M%S') + '.json', 'w')
-        #     self.counter = 0
         return
 
     def on_delete(self, status_id, user_id):
-        # self.delout.write( str(status_id) + "\n")
         return
 
     def on_limit(self, track):
-        # sys.stderr.write(track + "\n")
         return
 
     def on_error(self, status_code):
@@ -105,18 +102,22 @@ api = tweepy.API(auth)
 
 
 def main():
-    # track = ["location","Australia"]
+    # the locations shows the area from which we want to get twitter data
+    #here we draw a bounding box of Australia on AURIN 
     locations = [112.5927, -44.2745, 153.1982, -10.1492]
-
+    #initialize the listener
     listen = SListener(api, 'Australia')
+    #use stream to get twitter data
     stream = tweepy.Stream(auth, listen)
 
     print("Streaming started...")
 
     try:
+        #get twitter in our specific area
         stream.filter(locations=locations)
 
     except Exception as ex:
+        #handle exception
         print(str(ex))
         print("error!")
         # stream.disconnect()
