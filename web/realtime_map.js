@@ -1,5 +1,5 @@
 //token of mapbox
-mapboxgl.accessToken = 'pk.eyJ1IjoibGl1anVueXVhbiIsImEiOiJjajJlbDN5dTYwNmRoMzJvODhscTZ3bnFkIn0.Vhoj1WBop0EnuGKlTm6I2w';
+mapboxgl.accessToken = '<your mapbox access token>';
 
 //the url of flask server, use it to get realtime geo data of tweets from couchDB
 //change the port 1337 if it is being used by another application
