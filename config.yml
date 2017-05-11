@@ -1,0 +1,61 @@
+---
+# Author: liyu zhang liyuz@student.unimelb.edu.au
+# Time: 10/May/2017
+# Project: Clustering and Cloud Computing - Assignment 2
+
+# This playbook is used for configure the couchDB on master instance,
+# it will specify the bind address and the volume to store data.
+# 
+
+# install couchDB
+- name: install couchDB
+  command: sudo apt-get install couchdb -y
+  ignore_errors: yes
+# set bind adress, to get data from all instsances, we set bind address to "0,0,0,0",
+# it is not secure and should be improved later
+- name: set bind address
+  command: sudo curl -X PUT http://localhost:5984/_config/httpd/bind_address -d '"0.0.0.0"'
+  register: outdb1
+  ignore_errors: yes
+- name: result of setting bind address
+  debug: var=outdb1.stdout_lines
+  # go to the dir where volume get attached
+- name: go to mount
+  command: cd /mnt
+  # registeration
+- name: registeration
+  command: sudo mkfs.ext4 /dev/vdb
+  register: outdb2
+  ignore_errors: yes
+  # check if it is mounted before
+- name: check whether mounted
+  debug: var=outdb2.stdout_lines
+  # mount volume
+- name: mount volume
+  command: sudo mount /dev/vdb
+  register: outdb3
+  ignore_errors: yes
+- name: show mount result
+  debug: var=outdb3.stdout_lines
+  # change db saving loaction
+- name: delete existing default.ini
+  command: sudo rm /etc/couchdb/default.ini
+  # upload modified default.ini
+- name: upload modified default.ini
+  copy:
+    src: <your-modified-default.ini-path>
+    dest: /etc/couchdb
+  # check whether file is uploaded
+- name: check file (1/2)
+  command: ls
+  register: outdb4
+- name: check file (2/2)
+  debug: var=outdb4.stdout_lines
+  # when all configurations are done, restart CouchDB
+- name: reboot after configuration
+  command: /etc/init.d/couchdb restart
+  register: outdb5
+  ignore_errors: yes
+- name: restart result
+  debug: var=outdb5.stdout_lines
+
