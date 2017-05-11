@@ -1,6 +1,11 @@
 # Author: liyu zhang liyuz@student.unimelb.edu.au
 # Time: 10/May/2017
 # Project: Clustering and Cloud Computing - Assignment 2
+
+# User guide:
+# If this is the first time you run this program, you should only run the code before line 29,
+# it will show all available images on nectar and you can choose the one that fit your purpose the most.
+# :)
 from boto.ec2.regioninfo import RegionInfo
 import boto.ec2
 
@@ -27,7 +32,7 @@ for img in images:
 # create instance, the security group can be modified according to needs
 ec2_conn.run_instances('ami-c163b887', min_count=1, max_count=<up to you to decide>, key_name=<your key>, instance_type='m1.small',
                        security_groups=['ssh', 'default', 'icmp', 'http'], placement='melbourne-np')
-# terminate instance
+# Warning!!! terminate instance, enable this part of code if you know what your are doing :)
 '''ec2_conn.terminate_instances(instance_ids=['instance ID, like 'i-xxxxxxxx'])'''
 
 # show all reservation (instances)
@@ -40,7 +45,8 @@ instance_id = []
 for idx, res in enumerate(reservations):
     instance_id.append(str(res.instances)[10:-1])
     print(idx, res.id, res.instances)
-
+#####################################################
+# before running this part of code, make sure your nectar account can access extra volume
 # request volume
 vol_req = ec2_conn.create_volume(250, "melbourne-np")
 # attach volume
