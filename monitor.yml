@@ -7,7 +7,7 @@
 
 # To achieve auto monitoring - run this piece of code every x interval,
 # you can type these in your command line:
-  # while true; do ansible-playbook monitor.yml; sleep x; done
+  # $ while true; do ansible-playbook monitor.yml; sleep x; done
   # in sleep x, variable x is the interval (second) 
 
 # if process failed, it can restart the process.
