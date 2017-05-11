@@ -70,6 +70,3 @@ It will create a url and every time the front-end access the url, it will query 
 It should be noticed that if the port (1337 as default) is being used by another application, you need to change the port value in the main function of flask_server.py (line 70), and then change the port of corresponding var url (‘http://localhost:1337/’ as default) in realtime_mp.js (line 6). That’s where the front-end request the latest tweets.
 Then, before opening the web, you need to apply for a mapbox accesstoken and add it in realtime_map.js (line 2).
 Now, you can open the index.html with Chrome browser directly to see the results.
-
- 
- 
