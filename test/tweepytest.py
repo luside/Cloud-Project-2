@@ -3,10 +3,10 @@ from tweepy import OAuthHandler
 from slistener import SListener
 import time, tweepy, sys
 
-consumer_key = '8PNF7aMlERZFxs6qYlowHLSQe'
-consumer_secret = 'qP0KKhVpLkXlO4wJdKHKwZJfDDruFLpSBeIKlueZWIoaAl4EX9'
-access_token = '852460734524964869-D3kZYGXzZ7xB2hIpv1G8p6NGndiqnTH'
-access_secret = 'P0MfyHNL6quP4SRMQU0JmCCh7x4VIBQzud2Qa0OiswPok'
+consumer_key = '<your consumer key>'
+consumer_secret = '<your consumer secret>'
+access_token = '<your access token>'
+access_secret = '<your access secret>'
 
 auth = OAuthHandler(consumer_key,consumer_secret)
 auth.set_access_token(access_token,access_secret)
