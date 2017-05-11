@@ -1,0 +1,76 @@
+---
+# Author: liyu zhang liyuz@student.unimelb.edu.au
+# Time: 10/May/2017
+# Project: Clustering and Cloud Computing - Assignment 2
+
+# In real life, ansible can take control of many virtual machines, in the first time accessing them,
+# you can use following command to ignore some checking prompts:
+ # ansible-playbook setup.yml --ask-sudo-pass --ask-become-pass
+# This playbook is used for setup all the environment for crawling tweets, filtering,
+# and storing data in couchDB
+
+# When this code is running, you may receive warning that suggests using become instead of sudo and apt: name=XXX state=XXX
+# but after times and times running and testing, the sugguested modifications didn't work.
+# So you can use the code smoothly if you neglect the warning in purple. :)
+
+- name: set up instances
+  hosts: all
+  remote_user: root
+  become: true
+  tasks:
+    # update all tools
+    - name: update
+      command: sudo apt-get update
+    # install python on instances
+    - name: install python
+      apt: name=python3 state=present
+    # check whether python3 is installed
+    - name: check python version (1/2)
+      command: python3 --version
+      register: out1
+    - name: check python version (2/2)
+      debug: var=out1.stdout_lines
+    # install pip3
+    - name: install pip3
+      command: sudo apt-get -y install python3-pip
+    # check whether pip3 is installed
+    - name: check pip version (1/2)
+      command: pip3 --version
+      register: out2
+    - name: check pip version (2/2)
+      debug: var=out2.stdout_lines
+    # install curl
+    - name: install curl
+      command: sudo apt-get -y install curl
+    # check whether curl is installed
+    - name: check curl version (1/2)
+      command: curl --version
+      register: out2
+    - name: check curl version (2/2)
+      debug: var=out2.stdout_lines
+    # install screen
+    - name: install screen
+      command: sudo apt-get -y install screen
+    # install python packages
+      # install textblob
+    - name: install python pkg-textblob
+      command: sudo pip3 install textblob
+      # install couchdb (python)
+    - name: install python pkg-couchdb
+      command: sudo pip3 install couchdb
+      # install tweepy
+    - name: intall python pkg tweepy
+      command: sudo pip3 install tweepy
+    # upload python file for crawling tweets
+    - name: upload harverster
+      copy:
+        src: <your-file-path-of-TweetHarvester.py>
+        dest: <where-you-store-them-in-vm, like /home/ubuntu>
+    # configure couchDb on function node
+    - name: configure couchDB
+      include: config.yml
+      when: inventory_hostname in groups['function']
+    # start to run crawling file TweetHarvester.py
+    - name: run harverster
+      command: screen -dm python3 TweetHarvester.py
+
