@@ -8,8 +8,8 @@ import geojson
 app = Flask(__name__)
 
 #connect couchDB
-server = couchdb.Server('http://115.146.92.189:5984/')
-db = server['testing']
+server = couchdb.Server('<your couchDB address>')
+db = server['<your couchDB name>']
 
 #get the latest change of the couchDB
 the_var = db.changes(
