@@ -64,8 +64,8 @@
     # upload python file for crawling tweets
     - name: upload harverster
       copy:
-        src: your file path of TweetHarvester.py
-        dest: where you store them in vm, like /home/ubuntu
+        src: <your-file-path-of-TweetHarvester.py>
+        dest: <where-you-store-them-in-vm, like /home/ubuntu>
     # configure couchDb on function node
     - name: configure couchDB
       include: config.yml
