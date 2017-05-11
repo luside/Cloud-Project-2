@@ -8,6 +8,11 @@
  # ansible-playbook setup.yml --ask-sudo-pass --ask-become-pass
 # This playbook is used for setup all the environment for crawling tweets, filtering,
 # and storing data in couchDB
+
+# When this code is running, you may receive warning that suggests using become instead of sudo and apt: name=XXX state=XXX
+# but after times and times running and testing, the sugguested modifications didn't work.
+# So you can use the code smoothly if you neglect the warning in purple. :)
+
 - name: set up instances
   hosts: all
   remote_user: root
