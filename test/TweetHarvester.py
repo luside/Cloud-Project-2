@@ -76,23 +76,12 @@ class SListener(StreamListener):
         sys.stderr.write("Timeout, sleeping for 60 seconds...\n")
         time.sleep(60)
         return
-#Junyuan's token
-''' consumer_key = '5XF7i5eVvSHmaYvwk9pXm1aTW'
-consumer_secret = 'FYSiNwJ2n3hhK0zhML3kTv5MIzWQQmb1sY2QFcC4HPCRQhO3Bl'
-access_token = '702844657135329280-qkWhN7FyStxJH2Qq1HVjIFpH3Hr8O5K'
-access_secret = 'HVvRCPK1leCG8IyLl2eJ5jR5ZZfJNVhPWrKRaPj53EyU7' '''
 
-#Liam's token
-'''consumer_key = 'ibL3HDH2s2e3JNN2wkL3rgzsT'
-consumer_secret = 'Gq51qoHwRAjWpjUTQ5IWFj2exCcvMtmiCIZahtpJ3IHSe3Vzcv'
-access_token = '852463386700922880-9ll4KX0DNAGKpC3hgTPcSCFgHdXmULF'
-access_secret = 'pbewWtBcpljilaYiRcD229YJZyeuW7nOkOqwWqO5dxa0X' '''
-
-#Side's token
-consumer_key='8PNF7aMlERZFxs6qYlowHLSQe'
-consumer_secret = 'qP0KKhVpLkXlO4wJdKHKwZJfDDruFLpSBeIKlueZWIoaAl4EX9'
-access_token='852460734524964869-D3kZYGXzZ7xB2hIpv1G8p6NGndiqnTH'
-access_secret='P0MfyHNL6quP4SRMQU0JmCCh7x4VIBQzud2Qa0OiswPok'
+# token
+consumer_key='<your consumer key>'
+consumer_secret = '<your consumer secret>'
+access_token='<your access token>'
+access_secret='<your access secret>'
 
 
 auth = OAuthHandler(consumer_key, consumer_secret)
