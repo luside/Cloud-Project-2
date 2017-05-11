@@ -25,7 +25,6 @@ Before we use the ansible playbook, we need to create a host file containing the
 <name-you-would-like-to-call-it, like ‘instance-01’> ansible_ssh_host=<your-instance- address> ansible_connection=ssh ansible_ssh_private_key_file=<path-of-your-private-key>
 3 ansible playbook are included in the project. The setup.yml can ensure all the packages are installed and then start crawling program. The config.yml is responsible for installing CouchDb on specific instance, configuring the bind address so that other instances can save processed tweets into it and changing the default database and view directories to the extra volume. Last, monitor.yml can be ran with a fixed interval to check the status of crawling programs running on instances. If all the programs work well ,then everything is fine, but when the amount of tweets that we crawled has exceeded the limitation of Twitter, the program will exit, monitor.yml can restart the failed program
 To run setup.yml, you can use following command:
-8
 $ ansible-playbook setup.yml --ask-sudo-pass --ask-become-pass
 The config.yml do not need to be run because it will be invoked in setup.yml automatically. To run monitor.yml, if you would like to check the process every hour, this command might be helpful:
 $ while true; do ansible-playbook monitor.yml; sleep 3600; done
