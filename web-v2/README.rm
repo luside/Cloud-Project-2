@@ -11,3 +11,5 @@ $python flask_server.py
 
 access web page in chrome
 localhost:1337
+
+if the port 1337 is being used by another application, change the poart in flask_server.py (line 79)
