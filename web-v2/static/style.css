@@ -1,0 +1,123 @@
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%;}
+#echarts1 { width: 500px;height:45%; position:absolute; left: 0px; top: 0px;}
+#echarts2 { width: 500px;height:48%; position:absolute; left: 0px; bottom: 0px;}
+#fly_to_sydney {
+    display: block;
+    position: absolute;
+    top: 45px;
+    right: 0px;
+    margin: 0px auto;
+    width: 10%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    opacity:0.8
+}
+#fly_to_melbourne {
+    display: block;
+    position: absolute;
+    top: 90px;
+    right: 0px;
+    margin: 0px auto;
+    width: 10%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    opacity:0.8
+}
+#fly_to_center {
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 0px auto;
+    width: 10%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    opacity:0.8
+}
+#fly_to_brisbane {
+    display: block;
+    position: absolute;
+    top: 135px;
+    right: 0px;
+    margin: 0px auto;
+    width: 10%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    opacity:0.8
+}
+#fly_to_adelaide {
+    display: block;
+    position: absolute;
+    top: 180px;
+    right: 0px;
+    margin: 0px auto;
+    width: 10%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    opacity:0.8
+}
+#fly_to_perth {
+    display: block;
+    position: absolute;
+    top: 225px;
+    right: 0px;
+    margin: 0px auto;
+    width: 10%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    opacity:0.8
+}
+#fly_to_canberra {
+    display: block;
+    position: absolute;
+    top: 270px;
+    right: 0px;
+    margin: 0px auto;
+    width: 10%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    opacity:0.8
+}
