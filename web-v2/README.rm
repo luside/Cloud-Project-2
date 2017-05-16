@@ -1,0 +1,13 @@
+install couchDB, geojson, and flask library first.
+$pip install couchdb
+$pip install geojson
+$pip install Flask
+
+write your couchDB's address and name in flask_server.py (line 13 & 14)
+write your mapbox's token in mapbox.js (line 2)
+
+run flask server
+$python flask_server.py
+
+access web page in chrome
+localhost:1337
